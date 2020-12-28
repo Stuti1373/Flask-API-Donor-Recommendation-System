@@ -1,0 +1,173 @@
+<html>
+   <title>Homepage</title>
+   <style>
+      body {
+      padding: 10px;
+      border: 1px solid black; 
+      border-collapse: collapse;
+      }
+      .tabs{
+      width: 600px;
+      margin: 40px auto;
+      position: relative;
+      }
+      .tabs .tab{
+      float: left;
+      display: block;
+      }
+      .tabs .tab>input[type="radio"] {
+      position: absolute;
+      }
+      .tabs .tab>label {
+      display: block;
+      padding: 6px 21px;
+      font-size: 12px;
+      text-transform: uppercase;
+      cursor: pointer;
+      position: relative;
+      color: #FFF;
+      background: 	#228B22;
+      }
+      .tabs .content {
+      z-index: 0;
+      overflow: hidden;
+      width: 600px;
+      padding: 25px;
+      position: absolute;
+      top: 27px;
+      left: 0;
+      background: #303030;
+      color: #DFDFDF;
+      opacity:0;
+      transition: opacity 400ms ease-out;
+      }
+      .tabs>.tab>[id^="tab"]:checked + label {
+      top: 0;
+      background: #303030;
+      color: #F5F5F5;
+      }
+      .tabs>.tab>[id^="tab"]:checked ~ [id^="tab-content"] {
+      z-index: 1;
+      opacity: 1;
+      transition: opacity 400ms ease-out;
+      }
+   </style>
+   <body>
+      <ul class="tabs">
+         <li class="tab">
+            <input type="radio" name="tabs" checked="checked" id="tab1" />
+            <label for="tab1">Reports</label>
+            <div id="tab-content1" class="content">
+            <!-- Publish wordcloud -->
+            <form method="POST" action="{{url_for('search')}}">
+               <center>
+                  <hr>
+                  <center>
+                     <h1>School Donation Recommendation System</h1>
+                  </center>
+                  <hr>
+                  <select name="category">
+                     <option value="Books">Books</option>
+                     <option value="Technology">Technology</option>
+                     <option value="Supplies">Supplies</option>
+                     <option value="Art Supplies">Art Supplies</option>
+                     <option value="Trips">Trips</option>
+                     <option value="Visitors">Visitors</option>
+                     <option value="Others">Others</option>
+                  </select>
+                  <br>
+                  <button name="Generate WordCloud" type="submit">Generate WordCloud</button><br><br>
+               </center>
+            </form>
+            <!--Max Donors-->
+            <div id="maxdonors">
+               <form method="POST" action="{{url_for('donors')}}">
+                  <center>
+                     <select name="category">
+                        <option value="Technology">Technology</option>
+                        <option value="Books">Books</option>
+                        <option value="Supplies">Supplies</option>
+                        <option value="Art Supplies">Art Supplies</option>
+                        <option value="Trips">Trips</option>
+                        <option value="Visitors">Visitors</option>
+                        <option value="Others">Others</option>
+                     </select>
+                     <br>
+                     <button name="Generate Donor Report" type="submit">Generate Donor Report</button><br><br>
+                  </center>
+               </form>
+               <!--Display donations for each resource category-->
+               <form method="POST" action="{{url_for('resource')}}">
+                  <center>
+                     <select name="category">
+                        <option value="Books">Books</option>
+                        <option value="Technology">Technology</option>
+                        <option value="Supplies">Supplies</option>
+                        <option value="Art Supplies">Art Supplies</option>
+                        <option value="Trips">Trips</option>
+                        <option value="Visitors">Visitors</option>
+                        <option value="Others">Others</option>
+                     </select>
+                     <br>
+                     <button name="Max Resource" type="submit">Resource Utilization Report</button><br><br>
+                  </center>
+               </form>
+            </div>
+         </li>
+         <li class="tab">
+            <input type="radio" name="tabs" id="tab2" />
+            <label for="tab2">Draft Proposal</label>   
+            <div id="tab-content2" class="content">
+               <!--insert-->
+               <form method="POST" action="{{url_for('insert')}}">
+                  <center>
+                     <h3>Draft New Proposal:</h3>
+                     Select Category<br>
+                     <select name="category">
+                        <option value="Books">Books</option>
+                        <option value="Technology">Technology</option>
+                        <option value="Supplies">Supplies</option>
+                        <option value="Art Supplies">Art Supplies</option>
+                        <option value="Trips">Trips</option>
+                        <option value="Visitors">Visitors</option>
+                        <option value="Others">Others</option>
+                     </select>
+                     <br><br>
+                     Project Name<br><input type = "text" name= "pname" /> <br><br>
+                     Estimated Cost<br><input type = "text" name= "ecost" /> <br><br>
+                     Essay<br>
+                     <textarea rows="4" cols="50" name="essay"></textarea>
+                     <br><br>
+                     <button name="Save" type="submit">Save</button>
+                  </center>
+               </form>
+            </div>
+         </li>
+         <li class="tab">
+            <input type="radio" name="tabs" id="tab3" />
+            <label for="tab3">Modify Proposal</label>   
+            <div id="tab-content3" class="content">
+               <!--Delete Proposal-->
+               <form method="POST" action="{{url_for('delete')}}">
+                  <center>
+                     <h3>Delete Proposal:</h3>
+                     Select Category<br>
+                     <select name="category">
+                        <option value="Technology">Technology</option>
+                        <option value="Books">Books</option>
+                        <option value="Supplies">Supplies</option>
+                        <option value="Art Supplies">Art Supplies</option>
+                        <option value="Trips">Trips</option>
+                        <option value="Visitors">Visitors</option>
+                        <option value="Others">Others</option>
+                     </select>
+                     <br><br>
+                     Project Name<br><input type = "text" name= "pname" /> <br><br>
+                     <button name="Save" type="submit">Delete</button>
+                  </center>
+               </form>
+            </div>
+         </li>
+      </ul>
+   </body>
+</html>
